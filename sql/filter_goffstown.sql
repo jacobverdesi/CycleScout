@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS goffstown_road_network;
-CREATE TABLE goffstown_road_network AS
+DROP TABLE IF EXISTS goffstown_lines;
+CREATE TABLE goffstown_lines AS
 SELECT osm_id,
        access,
        bicycle,
@@ -18,7 +18,7 @@ SELECT osm_id,
        surface,
        tracktype,
        z_order,
-       ST_Intersection((Select ST_Buffer(way, 1) from planet_osm_polygon where name = 'Goffstown'), way) AS way
+       ST_Intersection((Select ST_Buffer(way, 50) from planet_osm_polygon where name = 'Goffstown'), way) AS way
 FROM planet_osm_line
 WHERE way && (Select way from planet_osm_polygon where boundary = 'administrative' and name = 'Goffstown')
   AND (bicycle is not null or highway is not null)

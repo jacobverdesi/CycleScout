@@ -10,7 +10,6 @@ services:
 
     ports:
         - "5432:5432"
-    network_mode: "host"
 
   osm_downloader:
     build: .

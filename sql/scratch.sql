@@ -50,3 +50,18 @@ BEGIN
   END LOOP;
 END $$;
 
+SELECT Distinct  access,
+       bicycle,
+       bridge,
+       construction,
+       foot,
+       highway,
+       horse,
+       junction,
+       layer,
+       oneway,
+       railway,
+       route,
+       surface,
+       tracktype
+from goffstown_lines;
