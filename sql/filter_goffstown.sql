@@ -18,9 +18,9 @@ SELECT osm_id,
        surface,
        tracktype,
        z_order,
-       ST_Intersection((Select ST_Buffer(way, 50) from planet_osm_polygon where name = 'Goffstown'), way) AS way
+       ST_Intersection((Select ST_Buffer(way, 1000) from planet_osm_polygon where name = 'Goffstown'), way) AS way
 FROM planet_osm_line
-WHERE way && (Select way from planet_osm_polygon where boundary = 'administrative' and name = 'Goffstown')
+WHERE way && ST_BUFFER((Select way from planet_osm_polygon where boundary = 'administrative' and name = 'Goffstown'),1000 )
   AND (bicycle is not null or highway is not null)
 ;
 

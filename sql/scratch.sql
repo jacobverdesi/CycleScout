@@ -64,4 +64,8 @@ SELECT Distinct  access,
        route,
        surface,
        tracktype
-from goffstown_lines;
+from bike_roads;
+
+
+select sum(st_length(way) * 0.000621371192)
+    as miles from bike_roads;

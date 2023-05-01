@@ -1,6 +1,5 @@
-
-DROP TABLE IF EXISTS goffstown_bike_roads;
-CREATE TABLE goffstown_bike_roads AS
+DROP TABLE IF EXISTS bike_roads;
+CREATE TABLE bike_roads AS
 SELECT osm_id,
        access,
        bicycle,
@@ -19,12 +18,11 @@ SELECT osm_id,
        surface,
        tracktype,
        z_order,
-       ST_Intersection((Select ST_Buffer(way,1000) from planet_osm_polygon where name = 'Goffstown'), way) AS way
-FROM planet_osm_line
-WHERE way && ST_BUFFER((Select way from planet_osm_polygon where boundary = 'administrative' and name = 'Goffstown'),1000 )-- Goffstown
-  AND (access not in ('private', 'customers', 'military') or access is null)                               -- private access
-  AND (bicycle not in ('dismount', 'use_sidepath', 'private', 'no') or bicycle is null)                    -- private bicycle
-  AND osm_id not in (Select osm_id from planet_osm_line group by osm_id having count(*) > 1)               -- duplicate ways
+       way
+FROM goffstown_lines
+WHERE (access not in ('private', 'customers', 'military') or access is null)                 -- private access
+  AND (bicycle not in ('dismount', 'use_sidepath', 'private', 'no') or bicycle is null)      -- private bicycle
+  AND osm_id not in (Select osm_id from planet_osm_line group by osm_id having count(*) > 1) -- duplicate ways
 
 
 --    OR highway = 'cycleway'
