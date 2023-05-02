@@ -9,7 +9,7 @@ SELECT osm_id,
        highway,
        horse,
        junction,
-       layer,
+       coalesce(layer, '0') as layer,
        name,
        oneway,
        railway,
@@ -19,8 +19,8 @@ SELECT osm_id,
        tracktype,
        z_order,
        way
-FROM goffstown_lines
-WHERE (access not in ('private', 'customers', 'military') or access is null)                 -- private access
+FROM planet_osm_line
+WHERE (access not in ('private', 'customers', 'military','no') or access is null)                 -- private access
   AND (bicycle not in ('dismount', 'use_sidepath', 'private', 'no') or bicycle is null)      -- private bicycle
   AND osm_id not in (Select osm_id from planet_osm_line group by osm_id having count(*) > 1) -- duplicate ways
 
@@ -36,4 +36,11 @@ WHERE (access not in ('private', 'customers', 'military') or access is null)    
                        'razed', 'corridor', 'busway', 'via_ferrata',
                        'trunk', 'trunk_link', 'footway', 'service', 'bridleway'))
     );
+CREATE INDEX bike_roads_way_idx ON bike_roads USING gist(way);
+
+DELETE FROM bike_roads WHERE osm_id IN
+(Select t2.osm_id FROM bike_roads t1,
+     bike_roads t2
+WHERE t1.osm_id <> t2.osm_id
+    AND st_equals(t1.way, t2.way))
 
