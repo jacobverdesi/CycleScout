@@ -19,7 +19,7 @@ SELECT osm_id,
        tracktype,
        z_order,
        way
-FROM planet_osm_line
+FROM goffstown_lines
 WHERE (access not in ('private', 'customers', 'military','no') or access is null)                 -- private access
   AND (bicycle not in ('dismount', 'use_sidepath', 'private', 'no') or bicycle is null)      -- private bicycle
   AND osm_id not in (Select osm_id from planet_osm_line group by osm_id having count(*) > 1) -- duplicate ways

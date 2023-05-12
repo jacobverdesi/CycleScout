@@ -2,7 +2,6 @@ version: "3"
 services:
   db:
     image: postgis/postgis
-    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -12,7 +11,7 @@ services:
         - "5432:5432"
 
   osm_downloader:
-    build: .
+    build: ..
     volumes:
       - .:/app
     depends_on:

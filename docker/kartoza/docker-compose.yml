@@ -1,0 +1,16 @@
+version: "3"
+services:
+  pgrouting:
+    image: kartoza/postgis:15-3.3
+    volumes:
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - ./data:/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+#volumes:
+#  db-data:
+

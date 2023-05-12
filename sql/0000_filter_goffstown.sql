@@ -23,4 +23,3 @@ FROM planet_osm_line
 WHERE way && ST_BUFFER((Select way from planet_osm_polygon where boundary = 'administrative' and name = 'Goffstown'),1000 )
   AND (bicycle is not null or highway is not null)
 ;
-
