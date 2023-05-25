@@ -4,3 +4,4 @@
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/RouteFinder.iml
 /.idea/.gitignore
+/Strava Import Service/database/data/

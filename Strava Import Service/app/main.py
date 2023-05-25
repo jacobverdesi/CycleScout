@@ -1,11 +1,14 @@
-from fastapi import FastAPI
+import uvicorn
+from fastapi import FastAPI, APIRouter
 
-app = FastAPI(theme="dark")
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+from app.routers import strava_auth
 
+app = FastAPI()
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
+api_router = APIRouter()
+api_router.include_router(strava_auth.router, tags=["login"])
+
+app.include_router(api_router, prefix="/api")
+
+if __name__ == '__main__':
+    uvicorn.run("app.main:app",reload=True, host="0.0.0.0", port=8080)
