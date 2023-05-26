@@ -15,10 +15,10 @@ response = requests.post(
 # Save json response as a variable
 strava_tokens = response.json()
 # Save tokens to file
-with open('strava_tokens.json', 'w') as outfile:
+with open('../routers/strava_tokens.json', 'w') as outfile:
     json.dump(strava_tokens, outfile)
 # Open JSON file and print the file contents
 # to check it's worked properly
-with open('strava_tokens.json') as check:
+with open('../routers/strava_tokens.json') as check:
     data = json.load(check)
 print(data)
