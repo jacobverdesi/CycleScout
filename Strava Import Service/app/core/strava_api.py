@@ -33,6 +33,7 @@ def get_refresh_token(refresh_token):
     ).json()
     return strava_token
 
+
 def get_activities(access_token, page):
     url = STRAVA_API_URL + "activities/"
     activities_list = requests.get(url + '?access_token=' + access_token + '&per_page=' + str(page)).json()
