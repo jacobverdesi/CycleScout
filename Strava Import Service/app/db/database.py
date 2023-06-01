@@ -1,10 +1,24 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlmodel import SQLModel, create_engine
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/postgres"
+DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/postgres"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+engine = create_engine(DATABASE_URL)
 
-Base = declarative_base()
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
+
+# def update_db_and_tables():
+#     # save old data
+#     # drop tables
+#     # create new tables
+#     # migrate old data to new schema
+#     # insert new data
+#
+#     SQLModel.metadata.drop_all(engine)
+#     SQLModel.metadata.create_all(engine)
+
+
+if __name__ == "__main__":
+    create_db_and_tables()

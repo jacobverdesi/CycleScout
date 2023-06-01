@@ -1,16 +1,12 @@
-from typing import TYPE_CHECKING
-
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
-
-from app.db.database import Base
+from sqlmodel import Field, SQLModel, Relationship
 
 
-class StravaToken(Base):
-    __tablename__ = "strava_tokens"
-    access_token = Column(String, primary_key=True, index=True)
-    refresh_token = Column(String)
-    expires_at = Column(Integer)
-    expires_in = Column(Integer)
-    token_type = Column(String)
-    athlete_id = Column(Integer, ForeignKey('strava_athlete.id'))
+
+class StravaToken(SQLModel, table=True):
+    access_token: str = Field(primary_key=True)
+    refresh_token: str = Field(default=None, nullable=True)
+    expires_at: int = Field(default=None, nullable=True)
+    expires_in: int = Field(default=None, nullable=True)
+    token_type: str = Field(default=None, nullable=True)
+    athlete_id: int = Field(foreign_key="athlete.id")
+    #athlete: Athlete = Relationship(back_populates="tokens")

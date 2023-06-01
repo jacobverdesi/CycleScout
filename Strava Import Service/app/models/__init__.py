@@ -1,3 +1,2 @@
-from .athlete import Athlete
 from .strava_token import StravaToken
-from .activity import Activity
+from .athlete import MetaAthlete, SummaryAthlete, DetailedAthlete, Athlete

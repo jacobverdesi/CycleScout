@@ -1,102 +1,54 @@
-from sqlalchemy import Column, Integer, String, Boolean, Float, BigInteger, DateTime
-
-from app.db.database import Base
-
-
-class Activity(Base):
-    __tablename__ = "strava_activities"
-    id = Column(BigInteger, primary_key=True, index=True)
-    external_id = Column(String)
-    upload_id = Column(BigInteger)
-    athlete_id = Column(Integer)
-    name = Column(String)
-    distance = Column(Float)
-    moving_time = Column(Integer)
-    elapsed_time = Column(Integer)
-    total_elevation_gain = Column(Float)
-    elev_high = Column(Float)
-    elev_low = Column(Float)
-    type = Column(String)
-    sport_type = Column(String)
-    start_date = Column(DateTime)
-    start_date_local = Column(DateTime)
-    timezone = Column(String)
-    start_latlng = Column(String)
-    end_latlng = Column(String)
-    achievement_count = Column(Integer)
-    kudos_count = Column(Integer)
-    comment_count = Column(Integer)
-    athlete_count = Column(Integer)
-    photo_count = Column(Integer)
-    total_photo_count = Column(Integer)
-    map = Column(String)
-    trainer = Column(Boolean)
-    commute = Column(Boolean)
-    manual = Column(Boolean)
-    private = Column(Boolean)
-    flagged = Column(Boolean)
-    workout_type = Column(Integer)
-    average_speed = Column(Float)
-    max_speed = Column(Float)
-    has_kudoed = Column(Boolean)
-    gear_id = Column(String)
-    kilojoules = Column(Float)
-    average_watts = Column(Float)
-    device_watts = Column(Boolean)
-    max_watts = Column(Integer)
-    weighted_average_watts = Column(Integer)
+import datetime
+from sqlmodel import Field, SQLModel
 
 
-# id,
-# external_id,
-# upload_id,
-# upload_id_str,
-# athlete,
-# name,
-# distance,
-# moving_time,
-# elapsed_time,
-# total_elevation_gain,
-# elev_high,
-# elev_low,
-# type,
-# sport_type,
-# workout_type,
-# start_date,
-# start_date_local,
-# timezone,
-# utc_offset,
-# location_city,
-# location_state,
-# location_country,
-# start_latlng,
-# end_latlng,
-# achievement_count,
-# has_kudoed,
-# kudos_count,
-# comment_count,
-# athlete_count,
-# photo_count,
-# total_photo_count,
-# map,
-# trainer,
-# commute,
-# manual,
-# private,
-# visibility,
-# flagged,
-# gear_id,
-# average_speed,
-# max_speed,
-# average_watts,
-# kilojoules,
-# device_watts,
-# has_heartrate,
-# heartrate_opt_out,
-# max_heartrate,
-# average_heartrate,
-# display_hide_heartrate_option,
-# resource_state,
-# from_accepted_tag,
-# pr_count,
-# suffer_score
+class SummaryActivity(SQLModel, table=True):
+    athlete_id: int = Field(default=None, nullable=True)
+    name: str = Field(default=None, nullable=True)
+    distance: float = Field(default=None, nullable=True)
+    moving_time: int = Field(default=None, nullable=True)
+    elapsed_time: int = Field(default=None, nullable=True)
+    total_elevation_gain: float = Field(default=None, nullable=True)
+    type: str = Field(default=None, nullable=True)
+    sport_type: str = Field(default=None, nullable=True)
+    workout_type: int = Field(default=None, nullable=True)
+    id = Field(int, primary_key=True)
+    external_id: str = Field(default=None, nullable=True)
+    upload_id: int = Field(default=None, nullable=True)
+    start_date: datetime.datetime = Field(default=None, nullable=True)
+    start_date_local: datetime.datetime = Field(default=None, nullable=True)
+    timezone: str = Field(default=None, nullable=True)
+    utc_offset: int = Field(default=None, nullable=True)
+    start_latlng: str = Field(default=None, nullable=True)
+    end_latlng: str = Field(default=None, nullable=True)
+    location_city: str = Field(default=None, nullable=True)
+    location_state: str = Field(default=None, nullable=True)
+    location_country: str = Field(default=None, nullable=True)
+    achievement_count: int = Field(default=None, nullable=True)
+    kudos_count: int = Field(default=None, nullable=True)
+    comment_count: int = Field(default=None, nullable=True)
+    athlete_count: int = Field(default=None, nullable=True)
+    photo_count: int = Field(default=None, nullable=True)
+    map_id: str = Field(default=None, nullable=True)
+    trainer: bool = Field(default=None, nullable=True)
+    commute: bool = Field(default=None, nullable=True)
+    manual: bool = Field(default=None, nullable=True)
+    private: bool = Field(default=None, nullable=True)
+    flagged: bool = Field(default=None, nullable=True)
+    gear_id: str = Field(default=None, nullable=True)
+    from_accepted_tag: bool = Field(default=None, nullable=True)
+    average_speed: float = Field(default=None, nullable=True)
+    max_speed: float = Field(default=None, nullable=True)
+    average_cadence: float = Field(default=None, nullable=True)
+    average_watts: float = Field(default=None, nullable=True)
+    weighted_average_watts: float = Field(default=None, nullable=True)
+    kilojoules: float = Field(default=None, nullable=True)
+    device_watts: bool = Field(default=None, nullable=True)
+    has_heartrate: bool = Field(default=None, nullable=True)
+    average_heartrate: float = Field(default=None, nullable=True)
+    max_heartrate: float = Field(default=None, nullable=True)
+    max_watts: int = Field(default=None, nullable=True)
+    pr_count: int = Field(default=None, nullable=True)
+    total_photo_count: int = Field(default=None, nullable=True)
+    has_kudoed: bool = Field(default=None, nullable=True)
+    suffer_score: int = Field(default=None, nullable=True)
