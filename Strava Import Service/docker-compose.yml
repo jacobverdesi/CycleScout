@@ -10,6 +10,12 @@ services:
       - ./db/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./dv/redis/data:/data
   app:
     build:
       context: ./app

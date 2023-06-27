@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import FastAPI, APIRouter
 from starlette.templating import Jinja2Templates
+from stravalib import Client
 
-from app.db.database import create_db_and_tables
 from app.routers import root,strava_auth, athletes, activities
 
 app = FastAPI()
@@ -18,13 +18,13 @@ app.include_router(api_router, prefix="/api")
 
 
 
-@app.on_event("startup")
-def on_startup():
-    # get schema from db
-    # compare schema to models
-    # if schema is different, update db
-
-    create_db_and_tables()
+# @app.on_event("startup")
+# def on_startup():
+#     # get schema from db
+#     # compare schema to models
+#     # if schema is different, update db
+#
+#     create_db_tables_index()
 
 
 if __name__ == '__main__':
