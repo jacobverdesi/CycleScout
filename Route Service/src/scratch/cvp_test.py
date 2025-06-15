@@ -36,7 +36,7 @@ print(np.round(C,4))
 # Defining the variables
 X = cp.Variable(C.shape, boolean=True)
 u = cp.Variable(n, integer=True)
-m = 3
+m = 5
 ones = np.ones((n,1))
 
 # Defining the objective function

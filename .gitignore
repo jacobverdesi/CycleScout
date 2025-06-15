@@ -1,7 +1,2 @@
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/inspectionProfiles/profiles_settings.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/RouteFinder.iml
-/.idea/.gitignore
+.idea/*
 /Strava Import Service/database/data/
