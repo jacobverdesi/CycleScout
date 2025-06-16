@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import sqlalchemy as sa
 
-from src.ORtools import VRPsolver
+from ORtools import VRPsolver
 
 # import cvxpy as cp
 

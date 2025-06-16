@@ -1,6 +1,4 @@
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import cvxpy as cp
 from geopy import distance # Library for geographical calculations
 
